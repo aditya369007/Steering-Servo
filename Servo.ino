@@ -1,7 +1,3 @@
-#include "TimerOne.h"
-
-
-
 const int Enable = 6;
 const int InA = 7;
 const int InB = 11;
