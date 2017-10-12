@@ -1,53 +1,72 @@
+/*
+ Name:    Servo_VS.ino
+ Created: 10/11/2017 6:10:39 PM
+ Author:  ADITYA
+*/
 const int Enable = 6;
 const int InA = 7;
 const int InB = 11;
-unsigned long starttime;
-unsigned long endtime;
+const int time = 12000;
 byte incdata;
+unsigned long previousMillis;
+unsigned long currenttime;
+// the setup function runs once when you press reset or power the board
 void setup() {
-  pinMode(10,OUTPUT);
-  Timer1.initialize();
 
   pinMode(Enable, OUTPUT);
   pinMode(InA, OUTPUT);
   Serial.begin(9600);
+
   
-  // put your setup code here, to run once:
- digitalWrite(Enable, HIGH);
- 
+  digitalWrite(Enable, HIGH);
+
+
 }
 
+// the loop function runs over and over again until power down or reset
 void loop() {
 
 
- if (Serial.available()>0)
- {
-  incdata = Serial.read();
-
-  if (incdata == 'd')
+  if (Serial.available()>0)
   {
-     digitalWrite(InA, LOW);
-analogWrite(InB, 1);
-delay(1500*8);
-analogWrite(InB,0);
-    }
-    
-   if (incdata == 'a')
-  {
-    
-    
-    digitalWrite(InA, LOW);
-analogWrite(InB, 254);
-delay(1500*8);
+    incdata = Serial.read();
 
-}
+    if (incdata == 'd')
+    {
+      previousMillis = millis();
+      digitalWrite(InA, LOW);
+      analogWrite(InB, 1);
+      while (time!=currenttime-previousMillis)
+      {
+        currenttime = millis();
+        
+      }
+      analogWrite(InB, 0);
     }
-  if (incdata == 's')  
- {
-  digitalWrite(InA,HIGH); 
+
+    if (incdata == 'a')
+    {
+
+
+      previousMillis = millis();
+      digitalWrite(InA, LOW);
+      analogWrite(InB, 254);
+      while (time != currenttime - previousMillis)
+      {
+        currenttime = millis();
+        }
+      analogWrite(InB, 0);
+
+    }
+    if (incdata == 's')
+    {
+      digitalWrite(InA, HIGH);
+    }
   }
+  
+
+
 
   
-  } 
-
+}
 
