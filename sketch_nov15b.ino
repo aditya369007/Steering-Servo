@@ -10,7 +10,7 @@ Author:  ADITYA
 #define right 480
 const int Enable = 2;               //for the servo to start working
 const int InA = 7;                  //inhibit input has to be disabled for the motor to spin
-const int InB = 11;                 // the PWM input. 1 for direction 1 254 for direction 2
+const int InB = 9;                 // the PWM input. 1 for direction 1 254 for direction 2
 const int fdbk = A0;                //output of the encoder goes here
 double currentpos = 0;                //variable for current position
 double desired = mid;               //setting the desired position as mid
